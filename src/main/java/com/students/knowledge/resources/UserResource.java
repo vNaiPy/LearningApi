@@ -1,6 +1,7 @@
 package com.students.knowledge.resources;
 
 import com.students.knowledge.domain.User;
+import com.students.knowledge.domain.dto.UserDTO;
 import com.students.knowledge.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,10 @@ public class UserResource {
     private UserService _userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll () {
+    public ResponseEntity<List<UserDTO>> findAll () {
         List<User> list = _userService.findAll();
-        return ResponseEntity.ok().body(list);
+        List<UserDTO> userDTOList = list.stream().map(UserDTO::new).toList();
+        return ResponseEntity.ok().body(userDTOList);
     }
 
 }
