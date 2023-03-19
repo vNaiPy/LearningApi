@@ -1,6 +1,7 @@
 package com.students.knowledge.services;
 
 import com.students.knowledge.domain.User;
+import com.students.knowledge.domain.dto.UserDTO;
 import com.students.knowledge.repositories.UserRepository;
 import com.students.knowledge.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,4 +37,14 @@ public class UserService {
         _userRepository.deleteById(id);
     }
 
+    public void update (UserDTO userDto) {
+        User user = findById(userDto.getId());
+        updateData(userDto, user);
+        _userRepository.save(user);
+    }
+
+    private void updateData (UserDTO userDto, User user) {
+        user.setName(userDto.getName());
+        user.setEmail(userDto.getEmail());
+    }
 }
