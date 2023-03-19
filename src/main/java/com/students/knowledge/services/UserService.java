@@ -27,4 +27,8 @@ public class UserService {
         return user.get();
     }
 
+    public User insert (User user) {
+        return _userRepository.insert(user);
+    }
+
 }
