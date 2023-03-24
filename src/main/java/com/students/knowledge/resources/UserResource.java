@@ -1,5 +1,6 @@
 package com.students.knowledge.resources;
 
+import com.students.knowledge.domain.Post;
 import com.students.knowledge.domain.User;
 import com.students.knowledge.domain.dto.UserDTO;
 import com.students.knowledge.services.UserService;
@@ -29,6 +30,12 @@ public class UserResource {
     public ResponseEntity<UserDTO> findById (@PathVariable String id) {
         User user = _userService.findById(id);
         return ResponseEntity.ok().body(new UserDTO(user));
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPostListById (@PathVariable String id) {
+        User user = _userService.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
     }
 
     @PostMapping
