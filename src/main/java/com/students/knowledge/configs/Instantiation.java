@@ -2,6 +2,7 @@ package com.students.knowledge.configs;
 
 import com.students.knowledge.domain.Post;
 import com.students.knowledge.domain.User;
+import com.students.knowledge.domain.dto.AuthorDTO;
 import com.students.knowledge.repositories.PostRepository;
 import com.students.knowledge.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,10 @@ public class Instantiation implements CommandLineRunner {
         User maria = new User(null, "Maria Brown", "maria@gmail.com", "1234");
         User alex = new User(null, "Alex Green", "alex@gmail.com", "1234");
         User bob = new User(null, "Bob Grey", "bob@gmail.com", "1234");
-
-        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", maria);
-        Post post2 = new Post(null, sdf.parse("23/03/2018"),  "Bom dia", "Acordei feliz hoje!", maria);
-
         _userRepository.saveAll(Arrays.asList(maria, alex, bob));
+
+        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
+        Post post2 = new Post(null, sdf.parse("23/03/2018"),  "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
         _postRepository.saveAll(Arrays.asList(post1, post2));
 
     }
