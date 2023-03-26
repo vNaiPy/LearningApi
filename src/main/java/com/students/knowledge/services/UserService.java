@@ -23,7 +23,7 @@ public class UserService {
     public User findById (String id) {
         Optional<User> user = _userRepository.findById(id);
         if(user.isEmpty()) {
-            throw new ObjectNotFoundException("Objeto não encontrado");
+            throw new ObjectNotFoundException("Usuário não encontrado");
         }
         return user.get();
     }
