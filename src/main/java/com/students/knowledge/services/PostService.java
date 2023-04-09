@@ -6,6 +6,7 @@ import com.students.knowledge.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,5 +19,9 @@ public class PostService {
         Optional<Post> optionalPost = _postRepository.findById(id);
         if (optionalPost.isEmpty()) throw new ObjectNotFoundException("Postagem não encontrada");
         return optionalPost.get();
+    }
+
+    public List<Post> findByTitle (String text) {
+        return _postRepository.findByTitleContainingIgnoreCase(text);
     }
 }
